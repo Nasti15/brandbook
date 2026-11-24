@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Обратный отсчёт</title>
+  <link rel="stylesheet" href="common.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Перейти к содержанию</a>
+
+  <header class="site-header">
+    <!-- Гамбургер (только мобильные) -->
+    <details class="nav-toggle" id="nav-toggle">
+      <summary class="nav-toggle__btn" aria-label="Открыть меню">
+        <span class="nav-toggle__icon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </summary>
+      <nav class="nav-toggle__panel" aria-label="Разделы брендбука">
+        <a href="#brief">Бриф</a>
+        <a href="#color">Цвет</a>
+        <a href="#type">Типографика</a>
+        <a href="#apply">Макеты и итог</a>
+      </nav>
+    </details>
+
+    <div class="logo" id="header-logo">Обратный отсчёт</div>
+
+    <nav class="site-nav" aria-label="Разделы брендбука">
+      <a href="#brief">Бриф</a>
+      <a href="#color">Цвет</a>
+      <a href="#type">Типографика</a>
+      <a href="#apply">Макеты и итог</a>
+    </nav>
+
+    <button type="button" class="btn btn-ghost reset-btn" id="reset-btn">Сброс</button>
+  </header>
+
+  <p class="storage-note" id="storage-note" role="status" hidden>
+    Хранилище недоступно: изменения не сохранятся, но сайт продолжит работать.
+  </p>
+
+  <main id="main">
+    <!-- ЧАСТЬ 1: БРИФ -->
+    <section id="brief" class="section" aria-labelledby="brief-title">
+      <h2 id="brief-title">01 · Бриф</h2>
+      <p class="lead">
+        «Обратный отсчёт» — агентство, которое делает ожидание события частью впечатления.
+        Меняйте название и слоган — они сразу появятся в примерах и в итоговом брендбуке.
+      </p>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>О бренде</h3>
+          <dl class="facts">
+            <dt>Аудитория</dt><dd id="fact-audience"></dd>
+            <dt>Цель</dt><dd id="fact-goal"></dd>
+            <dt>Характер</dt><dd id="fact-character"></dd>
+          </dl>
+        </div>
+
+        <form class="card" id="brief-form" novalidate>
+          <label for="name-input">Название бренда <span aria-hidden="true">*</span></label>
+          <input id="name-input" name="name" type="text" required
+                 aria-describedby="name-error" autocomplete="off" />
+          <p class="error" id="name-error" role="alert" hidden>
+            Введите название — без него брендбук не собрать.
+          </p>
+
+          <label for="slogan-input">Слоган <span aria-hidden="true">*</span></label>
+          <input id="slogan-input" name="slogan" type="text" required
+                 aria-describedby="slogan-error" autocomplete="off" />
+          <p class="error" id="slogan-error" role="alert" hidden>
+            Введите слоган.
+          </p>
+
+          <p class="hint">Поля со звёздочкой обязательны. Изменения сохраняются в этом браузере.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ЧАСТЬ 2: ЦВЕТ -->
+    <section id="color" class="section" aria-labelledby="color-title">
+      <h2 id="color-title">02 · Цвет</h2>
+      <p class="lead">Выберите палитру — фон, текст и акцент сразу обновятся во всех примерах.</p>
+
+      <div class="palette-list" id="palette-list" role="radiogroup" aria-label="Палитры"></div>
+
+      <div class="card sample" id="color-sample">
+        <h3>Пример применения</h3>
+        <p class="sample-text">Так выглядит текст на выбранном фоне.</p>
+        <button type="button" class="btn sample-btn">Кнопка бренда</button>
+      </div>
+    </section>
+
+    <!-- ЧАСТЬ 3: ТИПОГРАФИКА -->
+    <section id="type" class="section" aria-labelledby="type-title">
+      <h2 id="type-title">03 · Типографика</h2>
+      <p class="lead">Выберите шрифт и настройте размер и насыщенность — образец обновится сразу.</p>
+
+      <div class="grid two">
+        <div class="card">
+          <label for="preview-text">Текст для образца</label>
+          <textarea id="preview-text" rows="2"></textarea>
+
+          <label for="font-select">Шрифт</label>
+          <select id="font-select"></select>
+
+          <label for="font-size">Размер: <output id="font-size-out">18</output> px</label>
+          <input id="font-size" type="range" min="12" max="96" step="1" />
+
+          <label for="font-weight">Насыщенность: <output id="font-weight-out">700</output></label>
+          <input id="font-weight" type="range" min="400" max="800" step="100" />
+        </div>
+
+        <div class="card">
+          <h3>Образец</h3>
+          <p class="type-sample" id="type-sample"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЧАСТЬ 4: МАКЕТЫ И ИТОГ -->
+    <section id="apply" class="section" aria-labelledby="apply-title">
+      <h2 id="apply-title">04 · Макеты и итоговый брендбук</h2>
+      <p class="lead">Два независимых макета — постер с живым таймером и карточка для соцсетей. У каждого своя композиция.</p>
+
+      <div class="card timer-setup">
+        <label for="target-input">Дата и время премьеры</label>
+        <input id="target-input" type="datetime-local" />
+        <p class="error" id="target-error" role="alert" hidden>
+          Укажите дату в будущем — иначе таймер уже нулевой.
+        </p>
+        <div class="timer-actions">
+          <button type="button" class="btn" id="target-save">Сохранить</button>
+          <p class="hint" style="margin: 0;">Отсчёт идёт до этого момента и сохраняется в браузере.</p>
+        </div>
+      </div>
+
+      <fieldset class="layout-picker" aria-labelledby="poster-layout-legend">
+        <legend id="poster-layout-legend">Композиция постера</legend>
+        <label><input type="radio" name="poster-layout" value="poster-a" /> Классика</label>
+        <label><input type="radio" name="poster-layout" value="poster-b" /> Акцентный блок</label>
+        <label><input type="radio" name="poster-layout" value="poster-c" /> Орбита</label>
+      </fieldset>
+
+      <fieldset class="layout-picker" aria-labelledby="card-layout-legend">
+        <legend id="card-layout-legend">Композиция карточки</legend>
+        <label><input type="radio" name="card-layout" value="card-a" /> Классика</label>
+        <label><input type="radio" name="card-layout" value="card-b" /> Каскад</label>
+        <label><input type="radio" name="card-layout" value="card-c" /> Штамп</label>
+      </fieldset>
+
+      <div class="layouts">
+        <article class="poster" id="poster" aria-label="Постер"></article>
+        <article class="social-card" id="social-card" aria-label="Карточка для соцсетей"></article>
+      </div>
+
+      <section class="brandbook" id="brandbook" aria-labelledby="brandbook-title">
+        <h2 id="brandbook-title">Итоговый брендбук</h2>
+
+        <div class="bb-block">
+          <h3>Бриф</h3>
+          <dl class="facts">
+            <dt>Название</dt><dd id="bb-name"></dd>
+            <dt>Слоган</dt><dd id="bb-slogan"></dd>
+            <dt>Аудитория</dt><dd id="bb-audience"></dd>
+            <dt>Цель</dt><dd id="bb-goal"></dd>
+            <dt>Характер</dt><dd id="bb-character"></dd>
+            <dt>Премьера</dt><dd id="bb-target"></dd>
+          </dl>
+        </div>
+
+        <div class="bb-block">
+          <h3>Цвета</h3>
+          <div class="swatches" id="bb-swatches"></div>
+        </div>
+
+        <div class="bb-block">
+          <h3>Шрифт</h3>
+          <p id="bb-font"></p>
+        </div>
+
+        <div class="bb-block">
+          <h3>Макеты</h3>
+          <div class="bb-layouts" id="bb-layouts"></div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button type="button" class="btn" id="print-btn">Печать / PDF</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <p class="footer-brand">Обратный отсчёт</p>
+        <p class="footer-slogan">Самое интересное — до.</p>
+        <p class="footer-tagline">
+          Учебный вымышленный бренд. Демонстрирует, как ожидание события
+          становится частью впечатления.
+        </p>
+        <span class="footer-badge">Live preview</span>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">Разделы</p>
+        <ul class="footer-links">
+          <li><a href="#brief">Бриф</a></li>
+          <li><a href="#color">Цвет</a></li>
+          <li><a href="#type">Типографика</a></li>
+          <li><a href="#apply">Макеты и итог</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-heading">О проекте</p>
+        <p class="footer-meta">
+          <strong>Группа 2-МД-20</strong><br />
+          Васильева Анна Станиславовна<br />
+          Королева Анастасия Дмитриевна
+        </p>
+        <p class="footer-meta">
+          Настройки хранятся только в этом браузере и не отправляются на сервер.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 · «Обратный отсчёт»</p>
+      <a class="footer-top-link" href="#main">Наверх</a>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
